@@ -4,39 +4,39 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usuarios")
-public class Usuario {
+public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Integer id;
 
     @Column(nullable = false, length = 100)
-    private String nombre;
+    protected String nombre;
 
     @Column(nullable = false, length = 100)
-    private String apellido;
+    protected String apellido;
 
     @Column(nullable = false, unique = true, length = 100)
-    private String email;
+    protected String email;
 
     @Column(nullable = false, length = 255)
-    private String password;
+    protected String password;
 
     @Column(length = 20)
-    private String telefono;
+    protected String telefono;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Rol rol = Rol.CLIENTE;
+    protected Rol rol = Rol.CLIENTE;
 
     @Column(name = "fecha_registro", updatable = false)
-    private LocalDateTime fechaRegistro = LocalDateTime.now();
+    protected LocalDateTime fechaRegistro = LocalDateTime.now();
 
     public enum Rol {
         ADMIN, CLIENTE, EDITOR, INVITADO
     }
 
-    // Getters y Setters
-    
+    // Getters y setters
 }
