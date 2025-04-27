@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/login.css">
 </head>
 
 <body>
+
     <fieldset>
+        <h1>Iniciar Sesión</h1>
+        <form action="/login" method="post">
 
-        <h1>Bienvenido</h1>
-        <br><br>
+            <div class="input-group">
+                <i class="bi bi-envelope-fill"></i> <!-- Icono de sobre -->
+                <input type="text" name="email" placeholder="Correo electrónico" required>
+            </div>
 
-        <input type="text" name="usuario" id="idUsuario" placeholder="Usuario">
-        <br>
+            <div class="input-group">
+                <i class="bi bi-lock-fill"></i> <!-- Icono de candado -->
+                <input type="password" name="password" placeholder="Contraseña" required>
+            </div>
 
-        <input type="password" name="contrasenya" id="idContrasenya" placeholder="Contraseña">
-        <br>
+            <input type="submit" value="Entrar">
+        </form>
 
-        <input type="button" class="btn-login" value="Entrar">
-        <br>
-
-        <label>¿No tienes cuenta? <a href="registro.html">Regístrate</a></label>
-
+        <label>¿No tienes cuenta? <a th:href="@{/registro}">Regístrate</a></label>
     </fieldset>
+
+
 </body>
 
 </html>
