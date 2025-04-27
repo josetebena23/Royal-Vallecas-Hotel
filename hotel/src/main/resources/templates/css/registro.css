@@ -1,14 +1,18 @@
+/* registro.css */
+
+/* Fondo general y centrado del contenido */
 body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center; /* CENTRADO VERTICAL */
+    align-items: center;
     background-color: #f2f2f2;
     font-family: Arial, sans-serif;
 }
 
+/* Caja del formulario */
 fieldset {
     padding: 25px 30px;
     display: flex;
@@ -21,36 +25,49 @@ fieldset {
     text-align: center;
 }
 
+/* Título con animación */
 h1 {
     margin-bottom: 20px;
     font-size: 22px;
+    animation: fadeInFromTop 1.2s ease-out forwards;
+    color: #333;
 }
 
+/* Inputs */
 input[type="text"],
-input[type="email"],
 input[type="password"],
-input[type="button"] {
+input[type="email"] {
     width: 250px;
-    padding: 8px;
-    margin-bottom: 12px;
+    padding: 10px;
+    margin-bottom: 15px;
     font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     box-sizing: border-box;
+    background-color: #f9f9f9;
 }
 
-input[type="button"] {
-    background-color: cornflowerblue;
+/* Botón de registro */
+input[type="submit"] {
+    width: 250px;
+    padding: 10px;
+    background-color: rgb(55, 46, 25);
     color: white;
     border: none;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
-input[type="button"]:hover {
-    background-color: cornflowerblue;
+/* Hover botón */
+input[type="submit"]:hover {
+    background-color: rgb(195, 117, 28);
 }
 
+/* Enlace a login */
 label {
     margin-top: 10px;
     font-size: 14px;
@@ -65,4 +82,37 @@ label a {
 
 label a:hover {
     text-decoration: underline;
+}
+
+/* Animación para el título */
+@keyframes fadeInFromTop {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Iconos dentro de inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group i {
+    position: absolute;
+    top: 39%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #716b3b;
+    font-size: 18px;
+}
+
+.input-group input {
+    padding-left: 40px;
 }

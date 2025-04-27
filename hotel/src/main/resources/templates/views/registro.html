@@ -1,27 +1,60 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Registro de Usuario</title>
+    <!-- Enlace a Bootstrap para estilo bonito -->
     <link rel="stylesheet" href="../css/registro.css">
 </head>
 
 <body>
-    <fieldset>
-        <h1>Crear Cuenta</h1>
+    <div class="container mt-5">
+        <h2 class="text-center">Registro de Nuevo Usuario</h2>
 
-        <input type="text" name="nombre" id="idNombre" placeholder="Nombre completo">
-        <input type="text" name="usuario" id="idUsuario" placeholder="Nombre de usuario">
-        <input type="email" name="email" id="idEmail" placeholder="Correo electrónico">
-        <input type="password" name="contrasenya" id="idContrasenya" placeholder="Contraseña">
-        <input type="password" name="confirmar" id="idConfirmar" placeholder="Confirmar contraseña">
+        <!-- Formulario de registro -->
+        <form action="/usuarios" method="post" th:object="${usuario}" class="mt-4">
 
-        <input type="button" value="Registrarse">
+            <!-- Campo nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required>
+            </div>
 
-        <label>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></label>
-    </fieldset>
+            <!-- Campo apellido -->
+            <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" th:field="*{apellido}" class="form-control" id="apellido" required>
+            </div>
+
+            <!-- Campo email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" th:field="*{email}" class="form-control" id="email" required>
+            </div>
+
+            <!-- Campo contraseña -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" th:field="*{password}" class="form-control" id="password" required>
+            </div>
+
+            <!-- Campo teléfono -->
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" th:field="*{telefono}" class="form-control" id="telefono">
+            </div>
+
+            <!-- Botón de enviar -->
+            <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+
+        </form>
+
+    </div>
+
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
