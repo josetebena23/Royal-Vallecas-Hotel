@@ -1,4 +1,4 @@
-package main.java.com.hotel.hotel.repositorios;
+package com.hotel.hotel.repositorios;
 
 import com.hotel.hotel.entidades.Editor;
 import org.springframework.data.jpa.repository.JpaRepository;

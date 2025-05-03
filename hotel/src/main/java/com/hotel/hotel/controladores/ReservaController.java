@@ -1,4 +1,4 @@
-package main.java.com.hotel.hotel.controladores;
+package com.hotel.hotel.controladores;
 
 import com.hotel.hotel.entidades.Reserva;
 import com.hotel.hotel.servicios.ReservaService;

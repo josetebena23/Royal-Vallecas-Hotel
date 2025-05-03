@@ -1,9 +1,14 @@
 package com.hotel.hotel.entidades;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "habitaciones")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Habitacion {
 
     @Id
@@ -25,6 +30,7 @@ public class Habitacion {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private Estado estado = Estado.DISPONIBLE;
 
     @Column(columnDefinition = "TEXT")
@@ -40,71 +46,4 @@ public class Habitacion {
     public enum Estado {
         DISPONIBLE, OCUPADA, MANTENIMIENTO
     }
-
-    // Getters y Setters
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Integer getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(Integer capacidad) {
-        this.capacidad = capacidad;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getReseña() {
-        return reseña;
-    }
-
-    public void setReseña(String reseña) {
-        this.reseña = reseña;
-    }
-
 }

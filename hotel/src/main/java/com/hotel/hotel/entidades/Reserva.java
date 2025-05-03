@@ -1,10 +1,15 @@
 package com.hotel.hotel.entidades;
 
 import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "reservas")
+@Data               // Genera getters, setters, equals, hashCode y toString
+@NoArgsConstructor  // Constructor sin argumentos
+@AllArgsConstructor // Constructor con todos los argumentos
+@Builder            // Patrón builder para creación flexible de objetos
 public class Reserva {
 
     @Id
@@ -27,71 +32,14 @@ public class Reserva {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default  // Valor por defecto al usar el builder
     private Estado estado = Estado.PENDIENTE;
 
     @Column(name = "fecha_reserva", updatable = false)
+    @Builder.Default
     private LocalDate fechaReserva = LocalDate.now();
 
     public enum Estado {
         PENDIENTE, CONFIRMADA, CANCELADA, COMPLETADA
     }
-
-    // Getters y Setters
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Habitacion getHabitacion() {
-        return habitacion;
-    }
-
-    public void setHabitacion(Habitacion habitacion) {
-        this.habitacion = habitacion;
-    }
-
-    public LocalDate getFechaEntrada() {
-        return fechaEntrada;
-    }
-
-    public void setFechaEntrada(LocalDate fechaEntrada) {
-        this.fechaEntrada = fechaEntrada;
-    }
-
-    public LocalDate getFechaSalida() {
-        return fechaSalida;
-    }
-
-    public void setFechaSalida(LocalDate fechaSalida) {
-        this.fechaSalida = fechaSalida;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public LocalDate getFechaReserva() {
-        return fechaReserva;
-    }
-
-    public void setFechaReserva(LocalDate fechaReserva) {
-        this.fechaReserva = fechaReserva;
-    }
-
 }

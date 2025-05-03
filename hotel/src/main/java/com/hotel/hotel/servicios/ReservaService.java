@@ -1,4 +1,4 @@
-package main.java.com.hotel.hotel.servicios;
+package com.hotel.hotel.servicios;
 
 import com.hotel.hotel.entidades.Reserva;
 import com.hotel.hotel.repositorios.ReservaRepository;
