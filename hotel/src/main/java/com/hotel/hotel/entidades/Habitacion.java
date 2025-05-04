@@ -22,7 +22,7 @@ public class Habitacion {
     @Column(nullable = false)
     private Tipo tipo;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(nullable = false)
     private Double precio;
 
     @Column(nullable = false)
