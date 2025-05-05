@@ -42,5 +42,5 @@ public class Aficion {
         this.aficionados = new ArrayList<>();
         this.haters = new ArrayList<>();
     }
-
+    //Hola
 }
