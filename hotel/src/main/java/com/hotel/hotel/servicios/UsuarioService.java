@@ -4,6 +4,7 @@ import com.hotel.hotel.entidades.Usuario;
 import com.hotel.hotel.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder; // 👈 Añadir import
 
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +15,13 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder; // 👈 Añadir esto
+
     /**
      * Guarda un nuevo usuario en la base de datos.
-     * Antes de guardar, valida que el correo no esté ya registrado.
+     * Antes de guardar, valida que el correo no esté ya registrado y encripta la
+     * contraseña.
      */
     public Usuario guardarUsuario(Usuario usuario) {
         // Comprobar si el email ya existe
@@ -24,34 +29,26 @@ public class UsuarioService {
         if (existente.isPresent()) {
             throw new RuntimeException("El email ya está registrado. Por favor, use otro.");
         }
-        // Si el email no existe, guardar el usuario
+
+        // Encriptar la contraseña
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+
+        // Guardar el usuario
         return usuarioRepository.save(usuario);
     }
 
-    /**
-     * Busca un usuario por su ID.
-     */
     public Optional<Usuario> buscarPorId(Integer id) {
         return usuarioRepository.findById(id);
     }
 
-    /**
-     * Busca un usuario por su email.
-     */
     public Optional<Usuario> buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
 
-    /**
-     * Devuelve una lista de todos los usuarios.
-     */
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    /**
-     * Elimina un usuario por su ID.
-     */
     public void eliminarUsuario(Integer id) {
         usuarioRepository.deleteById(id);
     }
