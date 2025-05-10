@@ -1,0 +1,34 @@
+<div class="container">
+    <h1>Lista de habitaciones</h1>
+
+    <a href="/habitacion/c">Crear nueva habitación</a>
+    <br /><br />
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Número</th>
+            <th>Tipo</th>
+            <th>Precio (€)</th>
+            <th>Acciones</th>
+        </tr>
+        <th:block th:each="h : ${habitaciones}">
+            <tr>
+                <td th:text="${h.id}"></td>
+                <td th:text="${h.numero}"></td>
+                <td th:text="${h.tipo}"></td>
+                <td th:text="${h.precio}"></td>
+                <td>
+                    <form th:action="@{/habitacion/u}" method="get" style="display:inline">
+                        <input type="hidden" name="id" th:value="${h.id}">
+                        <input type="submit" value="Editar">
+                    </form>
+                    <form th:action="@{/habitacion/d}" method="post" style="display:inline">
+                        <input type="hidden" name="id" th:value="${h.id}">
+                        <input type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro?')">
+                    </form>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</div>
