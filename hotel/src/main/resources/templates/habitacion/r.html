@@ -9,6 +9,8 @@
             <th>ID</th>
             <th>Número</th>
             <th>Tipo</th>
+            <th>Capacidad</th>
+            <th>Descripción</th>
             <th>Precio (€)</th>
             <th>Acciones</th>
         </tr>
@@ -17,6 +19,8 @@
                 <td th:text="${h.id}"></td>
                 <td th:text="${h.numero}"></td>
                 <td th:text="${h.tipo}"></td>
+                <td th:text="${h.capacidad}"></td>
+                <td th:text="${h.descripcion}"></td>
                 <td th:text="${h.precio}"></td>
                 <td>
                     <form th:action="@{/habitacion/u}" method="get" style="display:inline">
