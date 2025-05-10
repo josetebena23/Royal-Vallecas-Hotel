@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Nueva habitación</h1>
+
+    <form action="/habitacion/c" method="post">
+        <label for="numero">Número:</label>
+        <input type="number" id="numero" name="numero" required><br />
+
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" required>
+            <option th:each="t : ${tipos}" th:value="${t}" th:text="${t}"></option>
+        </select>
+
+        <br>
+        <label for="precio">Precio (€):</label>
+        <input type="number" step="0.01" id="precio" name="precio" required><br />
+
+        <label for="capacidad">Capacidad:</label>
+        <input type="number" id="capacidad" name="capacidad" required><br />
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion"></textarea><br />
+
+        <input type="submit" value="Crear habitación">
+    </form>
+</div>

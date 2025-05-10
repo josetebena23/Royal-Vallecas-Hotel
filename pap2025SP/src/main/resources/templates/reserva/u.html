@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Editar reserva</h1>
+
+    <form action="/reserva/u" method="post">
+        <input type="hidden" name="id" th:value="${reserva.id}" />
+
+        <label for="usuario">Usuario:</label>
+        <select id="usuario" name="usuario">
+            <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombre}"
+                th:selected="${u.id} == ${reserva.usuario.id}">Usuario</option>
+        </select><br />
+
+        <label for="habitacion">Habitación:</label>
+        <select id="habitacion" name="habitacion">
+            <option th:each="h : ${habitaciones}" th:value="${h.id}" th:text="${h.numero}"
+                th:selected="${h.id} == ${reserva.habitacion.id}">Habitación</option>
+        </select><br />
+
+        <label for="fechaEntrada">Fecha de entrada:</label>
+        <input type="date" id="fechaEntrada" name="fechaEntrada" th:value="${reserva.fechaEntrada}" required><br />
+
+        <label for="fechaSalida">Fecha de salida:</label>
+        <input type="date" id="fechaSalida" name="fechaSalida" th:value="${reserva.fechaSalida}" required><br />
+
+        <input type="submit" value="Actualizar reserva">
+    </form>
+</div>
