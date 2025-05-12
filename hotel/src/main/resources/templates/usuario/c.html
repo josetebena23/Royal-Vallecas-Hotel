@@ -12,9 +12,12 @@
         <input type="password" id="contrasena" name="contrasena" required><br />
 
         <label>Tipo de usuario:</label><br />
-        <input type="radio" name="tipo" value="CLIENTE" checked> Cliente<br />
-        <input type="radio" name="tipo" value="EDITOR"> Editor<br />
-        <input type="radio" name="tipo" value="ADMINISTRADOR"> Administrador<br />
+        <input type="radio" name="tipo" value="CLIENTE" id="cliente" checked>
+        <label for="cliente">Cliente</label> <br />
+        <input type="radio" name="tipo" value="EDITOR" id="editor"> 
+        <label for="editor">Editor</label> <br />
+        <input type="radio" name="tipo" value="ADMINISTRADOR" id="administrador"> 
+        <label for="administrador">Administrador</label> <br />
 
         <input type="submit" value="Crear usuario">
     </form>
