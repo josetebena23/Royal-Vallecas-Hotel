@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Royale-Vallecas-Hotel</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/registro.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Cabecera idéntica al index.html -->
+    <header>
+        <div class="header-container">
+            <div class="logo-nav">
+                <h1><a href="index.html" class="logo-link">Royal-Vallecas-Hotel</a></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal solo con el formulario de registro -->
+    <main class="registro-main">
+        <fieldset class="registro-form">
+            <h1>Registro de Nuevo Usuario</h1>
+            <form action="/usuarios" method="post" th:object="${usuario}">
+                <div class="input-group">
+                    <i class="bi bi-person-fill"></i>
+                    <input type="text" th:field="*{nombre}" placeholder="Nombre" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="bi bi-person-bounding-box"></i>
+                    <input type="text" th:field="*{apellido}" placeholder="Apellido" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="bi bi-envelope-fill"></i>
+                    <input type="email" th:field="*{email}" placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="bi bi-lock-fill"></i>
+                    <input type="password" th:field="*{password}" placeholder="Contraseña" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="bi bi-telephone-fill"></i>
+                    <input type="text" th:field="*{telefono}" placeholder="Teléfono (opcional)">
+                </div>
+
+                <input type="submit" value="Registrarse">
+            </form>
+
+            <label>¿Ya tienes cuenta? <a href="login.html">Inicia Sesión</a></label>
+        </fieldset>
+    </main>
+
+    <!-- Pie de página idéntico al index.html -->
+    <footer>
+        <p>&copy; 2025 Royal-Vallecas-Hotel. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
