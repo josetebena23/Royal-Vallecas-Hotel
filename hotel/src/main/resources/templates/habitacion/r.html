@@ -12,7 +12,9 @@
             <th>Capacidad</th>
             <th>Descripción</th>
             <th>Precio (€)</th>
+            <th>Imagen</th>
             <th>Acciones</th>
+
         </tr>
         <th:block th:each="h : ${habitaciones}">
             <tr>
@@ -23,6 +25,15 @@
                 <td th:text="${h.descripcion}"></td>
                 <td th:text="${h.precio}"></td>
                 <td>
+                    <div style="display: flex; gap: 5px; overflow-x: auto; max-width: 200px;">
+                        <img th:if="${#lists.isEmpty(h.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
+                            alt="Imagen por defecto" width="80" />
+                        <img th:each="img : ${h.imagenes}" th:if="${!#lists.isEmpty(h.imagenes)}" th:src="@{${img.url}}"
+                            alt="Imagen habitación" width="80" />
+                    </div>
+                </td>
+
+                <td>
                     <form th:action="@{/habitacion/u}" method="get" style="display:inline">
                         <input type="hidden" name="id" th:value="${h.id}">
                         <input type="submit" value="Editar">
@@ -32,6 +43,7 @@
                         <input type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro?')">
                     </form>
                 </td>
+
             </tr>
         </th:block>
     </table>

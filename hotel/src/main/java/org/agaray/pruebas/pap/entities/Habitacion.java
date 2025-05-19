@@ -1,5 +1,8 @@
 package org.agaray.pruebas.pap.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,11 +25,17 @@ public class Habitacion {
     @Column(nullable = false)
     private Tipo tipo;
 
+    @OneToMany(mappedBy = "habitacion", fetch = FetchType.LAZY)
+    private List<Reserva> reservas = new ArrayList<>();
+
     @Column(nullable = false)
     private Double precio;
 
     @Column(nullable = false)
     private Integer capacidad;
+
+    @OneToMany(mappedBy = "habitacion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ImagenHabitacion> imagenes = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Editar habitación</h1>
 
-    <form action="/habitacion/u" method="post">
+    <form action="/habitacion/u" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" th:value="${habitacion.id}" />
 
         <label for="numero">Número:</label>
@@ -12,6 +12,22 @@
 
         <label for="precio">Precio (€):</label>
         <input type="number" step="0.01" id="precio" name="precio" th:value="${habitacion.precio}" required><br />
+
+        <div>
+            <h3>Imágenes actuales</h3>
+            <div th:each="img : ${habitacion.imagenes}" style="display: inline-block; margin: 10px;">
+                <img th:src="@{${img.url}}" alt="Imagen" width="100" />
+                <form th:action="@{/habitacion/imagen/d}" method="post" style="margin-top: 5px;">
+                    <input type="hidden" name="imagenId" th:value="${img.id}" />
+                    <input type="hidden" name="habitacionId" th:value="${habitacion.id}" />
+                    <button type="submit" onclick="return confirm('¿Eliminar esta imagen?')">Eliminar</button>
+                </form>
+            </div>
+        </div>
+
+        <label for="imagenes">Subir nuevas imágenes:</label>
+        <input type="file" id="imagenes" name="imagenes" accept="image/*" multiple><br />
+
 
         <input type="submit" value="Actualizar">
     </form>
