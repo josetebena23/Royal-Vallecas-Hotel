@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal-Vallecas-Hotel</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-nav">
+                <h1><a href="index.html" class="logo-link">Royal-Vallecas-Hotel</a></h1>
+                <nav class="main-nav">
+                    <a href="#">Inicio</a>
+                    <a href="#habitaciones-individuales">Habitaciones</a>
+                    <a href="servicios.html">Servicios</a>
+                    <a href="#contacto">Contacto</a>
+                </nav>
+            </div>
+            <div class="auth-nav">
+                <a href="../views/login.html" class="auth-btn">Iniciar sesión</a>
+                <a href="../views/registro.html" class="auth-btn register">Registrarse</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Bienvenido al confort de Vallecas</h2>
+    </section>
+
+    <main>
+        <h3>Reserva tu habitación con nosotros</h3>
+        <p>Disfruta de una experiencia única en el corazón de Madrid. Habitaciones cómodas, atención personalizada y ubicación ideal.</p>
+    </main>
+
+    <!-- Ancla invisible para habitaciones -->
+    <div id="habitaciones-individuales" class="anchor-offset"></div>
+
+    <section class="habitaciones-section">
+        <fieldset>
+            <legend><strong>Habitaciones Individuales</strong></legend>
+            <table id="tabla-individual" class="display">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Capacidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="individual.html">
+                                <img src="../img/individual.png" alt="Habitación Individual">
+                            </a>
+                        </td>
+                        <td>Individual Estándar</td>
+                        <td>1 persona</td>
+                        <td>49 €/noche</td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend><strong>Habitaciones Dobles</strong></legend>
+            <table id="tabla-doble" class="display">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Capacidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="doble.html">
+                                <img src="../img/doble.png" alt="Habitación Doble">
+                            </a>
+                        </td>
+                        <td>Doble Confort</td>
+                        <td>2 personas</td>
+                        <td>79 €/noche</td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </section>
+
+    <fieldset>
+        <legend><strong>Suites</strong></legend>
+        <table id="tabla-suite" class="display">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nombre</th>
+                    <th>Capacidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="suite.html">
+                            <img src="../img/suite.png" alt="Suite de lujo">
+                        </a>
+                    </td>
+                    <td>Suite Royale</td>
+                    <td>Hasta 4 personas</td>
+                    <td>149 €/noche</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+
+    <!-- Ancla invisible para contacto -->
+    <div id="contacto" class="anchor-offset"></div>
+
+    <section class="contacto-section">
+        <h3>Contacto</h3>
+        <div class="contacto-container">
+            <div class="contacto-info">
+                <h4>Información de contacto</h4>
+                <p><strong>Dirección:</strong> Calle Vallecas, 123, 28051 Madrid</p>
+                <p><strong>Teléfono:</strong> +34 912 345 678</p>
+                <p><strong>Email:</strong> info@royalvallecashotel.com</p>
+                <p><strong>Horario:</strong> Recepción 24 horas</p>
+            </div>
+
+            <form class="contacto-form">
+                <h4>Envíanos un mensaje</h4>
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Teléfono">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Tu mensaje" rows="5" required></textarea>
+                </div>
+                <button type="submit">Enviar mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Royal-Vallecas-Hotel. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
