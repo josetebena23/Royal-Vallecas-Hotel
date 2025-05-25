@@ -1,11 +1,11 @@
 package org.tfc.pruebas.pap.controller;
 
+import org.tfc.pruebas.pap.exception.DangerException;
+import org.tfc.pruebas.pap.services.HabitacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.tfc.pruebas.pap.exception.DangerException;
-import org.tfc.pruebas.pap.services.HabitacionService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,7 +18,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(ModelMap m) {
         m.put("habitaciones", habitacionService.listarHabitaciones());
-        m.put("view", "/home/home");
+        m.put("view", "home/home");
         return "_t/frame";
     }
 

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="/css/index.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            max-width: 400px;
+            margin: 100px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3d59;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1e3d59;
+        }
+
+        button[type="submit"] {
+            background-color: #1e3d59;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2a4f73;
+            transform: translateY(-2px);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        p a {
+            color: #ffc13b;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        p a:hover {
+            color: #e0a800;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <h2>Registrarse</h2>
+        <p th:if="${error}" th:text="${error}" style="color: red; text-align: center;"></p>
+
+        <form method="post" action="/usuario/registro">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" th:value="${nombre}" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" name="email" th:value="${email}" required />
+            </div>
+            <div class="form-group">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" name="contrasena" id="contrasena" required />
+            </div>
+            <div class="form-group">
+                <label for="contrasena2">Repite la contraseña:</label>
+                <input type="password" name="contrasena2" id="contrasena2" required />
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <input type="checkbox" id="mostrar" onclick="togglePasswords()" />
+                <label for="mostrar">Mostrar contraseñas</label>
+            </div>
+            <button type="submit">Registrarse</button>
+        </form>
+
+
+        <p>¿Ya tienes cuenta? <a href="/usuario/login">Inicia sesión</a></p>
+    </main>
+
+</body>
+
+</html>
+
+<script>
+    function togglePasswords() {
+        const pass1 = document.getElementById("contrasena");
+        const pass2 = document.getElementById("contrasena2");
+
+        const type = pass1.type === "password" ? "text" : "password";
+        pass1.type = type;
+        pass2.type = type;
+    }
+</script>

@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-<div th:replace="~{_t/head.html}"></div>
-<div th:replace="~{_t/header.html}"></div>
-<div th:replace="~{_t/nav.html}"></div>
-<div th:replace="~{${view}}"></div>
-<div th:replace="~{_t/footer.html}"></div>
-<div th:replace="~{_t/end.html}"></div>
+<head th:replace="~{_t/head.html}"></head>
+
+<body>
+    <div th:replace="~{_t/header.html}"></div>
+    <div th:replace="~{_t/nav.html}"></div>
+
+    <!-- CONTENIDO DINÁMICO DE CADA VISTA -->
+    <div th:replace="~{${view}}"></div>
+
+    <div th:replace="~{_t/footer.html}"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+
+</html>

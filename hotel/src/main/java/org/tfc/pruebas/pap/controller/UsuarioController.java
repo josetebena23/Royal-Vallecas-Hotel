@@ -1,16 +1,20 @@
 package org.tfc.pruebas.pap.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
+
 import org.tfc.pruebas.pap.entities.Administrador;
 import org.tfc.pruebas.pap.entities.Cliente;
 import org.tfc.pruebas.pap.entities.Editor;
 import org.tfc.pruebas.pap.entities.Usuario;
-import org.tfc.pruebas.pap.exception.DangerException;
-import org.tfc.pruebas.pap.helper.PRG;
 import org.tfc.pruebas.pap.services.UsuarioService;
+import org.tfc.pruebas.pap.helper.PRG;
+import org.tfc.pruebas.pap.exception.DangerException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/usuario")
@@ -76,6 +80,86 @@ public class UsuarioController {
         return "_t/frame";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/usuario/login";
+    }
+
+    @GetMapping("/login")
+    public String mostrarLogin(ModelMap m) {
+        m.put("view", "usuario/login");
+        return "_t/frame";
+    }
+
+    @PostMapping("/login")
+    public String loginPost(
+            @RequestParam("email") String email,
+            @RequestParam("contrasena") String contrasena,
+            HttpSession session,
+            ModelMap m) throws DangerException {
+        Optional<Usuario> usuarioOpt = usuarioService.buscarPorEmail(email);
+
+        if (usuarioOpt.isEmpty() || !usuarioService.comprobarContrasena(contrasena, usuarioOpt.get().getContrasena())) {
+            m.put("error", "Email o contraseña incorrectos");
+            m.put("view", "usuario/login");
+            return "_t/frame";
+        }
+
+        session.setAttribute("usuario", usuarioOpt.get());
+        return "redirect:/"; // o a donde quieras enviarlo tras el login
+    }
+
+    @GetMapping("/registro")
+    public String mostrarRegistro(ModelMap m) {
+        m.put("view", "usuario/registro");
+        return "_t/frame";
+    }
+
+    @PostMapping("/registro")
+    public String registrarCliente(
+            @RequestParam String nombre,
+            @RequestParam String email,
+            @RequestParam String contrasena,
+            @RequestParam String contrasena2,
+            ModelMap m) throws DangerException {
+        // Validación de coincidencia
+        if (!contrasena.equals(contrasena2)) {
+            m.put("error", "Las contraseñas no coinciden.");
+            m.put("view", "usuario/registro");
+            return "_t/frame";
+        }
+
+        // Validar la complejidad
+        if (!contrasenaValida(contrasena)) {
+            m.put("error", "La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula y un número.");
+            m.put("view", "usuario/registro");
+            return "_t/frame";
+        }
+
+        try {
+            Usuario cliente = new Cliente();
+            cliente.setNombre(nombre);
+            cliente.setEmail(email);
+            cliente.setContrasena(contrasena);
+            cliente.setRol(Usuario.Rol.CLIENTE);
+
+            usuarioService.guardarUsuario(cliente);
+        } catch (Exception e) {
+            m.put("error", "Ese correo ya está registrado.");
+            m.put("nombre", nombre);
+            m.put("email", email);
+            m.put("view", "usuario/registro");
+            return "_t/frame";
+        }
+
+        return "redirect:/usuario/login";
+    }
+
+    private boolean contrasenaValida(String contrasena) {
+        return contrasena.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$");
+    }
+
     @PostMapping("u")
     public String uPost(
             @RequestParam("id") Long id,
@@ -87,7 +171,13 @@ public class UsuarioController {
             if (u != null) {
                 u.setNombre(nombre);
                 u.setEmail(email);
-                u.setContrasena(contrasena); // ✅ usar el campo correcto
+
+                // Solo actualiza la contraseña si se escribió algo
+                if (contrasena != null && !contrasena.trim().isEmpty() &&
+                        !usuarioService.comprobarContrasena(contrasena, u.getContrasena())) {
+                    u.setContrasena(contrasena); // se encripta dentro del service
+                }
+
                 usuarioService.guardarUsuario(u);
             }
         } catch (Exception e) {

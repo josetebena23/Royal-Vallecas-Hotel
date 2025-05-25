@@ -176,57 +176,52 @@ main p {
 }
 
 table {
-    width: 95%;
+    width: 100%;
     margin: 20px auto;
-    border-collapse: separate;
-    border-spacing: 40px 25px;
+    border-collapse: collapse;
+    table-layout: auto; /* CAMBIADO */
 }
 
-table th {
-    background-color: #1e3d59;
-    color: white;
-    padding: 20px;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    border-radius: 8px;
-    min-width: 250px;
-}
-
-table thead tr th:first-child {
-    visibility: hidden;
-}
-
+table th,
 table td {
-    padding: 25px 40px;
+    padding: 15px 20px;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     vertical-align: middle;
-    transition: transform 0.3s;
-    min-width: 250px;
 }
 
-table td:hover {
-    transform: translateY(-5px);
+table th:first-child {
+    display: none; /* OCULTA completamente el th vacío */
+}
+
+table td:first-child {
+    width: 280px; /* Espacio reservado para imágenes */
+}
+
+table td:nth-child(2),
+table td:nth-child(3),
+table td:nth-child(4) {
+    word-break: break-word;
+    max-width: 300px;
 }
 
 table img {
-    width: 280px;
-    height: 200px;
+    width: 100px;
+    height: 70px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: 2px solid #e0e0e0;
 }
 
 table img:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
     border-color: #ffc13b;
 }
+
 
 fieldset {
     display: flex;
@@ -235,7 +230,7 @@ fieldset {
     padding: 30px;
     border-radius: 12px;
     border: 2px solid #1e3d59;
-    width: fit-content;
+    width: 90%;
     background-color: #f5f9ff;
     max-width: 800px;
     scroll-margin-top: 120px;

@@ -1,22 +1,19 @@
-<nav class="container bg-dark  rounded">
-	<ul class="nav nav-tabs">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-		<li class="nav-item navbar-brand">
-			<a class="nav-link " aria-current="page" href="/">
-				<img src="/img/icons/home.png" alt="INICIO" style="width:40px;">
-			</a>
-		</li>
-		<!--
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-				Listados
-			</a>
-			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="/pais/r">Países</a></li>
-				<li><a class="dropdown-item" href="/aficion/r">Aficiones</a></li>
-				<li><a class="dropdown-item" href="/persona/r">Personas</a></li>
+<body>
+	<div th:fragment="nav">
+		<nav class="container bg-dark rounded">
+			<ul class="nav nav-tabs">
+				<li class="nav-item navbar-brand">
+					<a class="nav-link" href="/">
+						<img src="/img/icons/home.png" alt="INICIO" style="width:40px;">
+					</a>
+				</li>
+				<!-- Más items aquí -->
 			</ul>
-		</li>
-		-->
-	</ul>
-</nav>
+		</nav>
+	</div>
+</body>
+
+</html>

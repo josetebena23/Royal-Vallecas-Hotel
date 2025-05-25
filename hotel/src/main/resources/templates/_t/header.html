@@ -1,10 +1,24 @@
-<header class="bg-dark container">
-	<!-- if not sesión 
-    	<a href="/persona/login">LOGIN</a> 
-    	<a href="/persona/c">REGISTRO</a>
-	-- else  
-		<span class="text-white">Hola NOMBRE </span>
-		<a href="/persona/logoutPost">LOGOUT</a>
-	-->
-	<!-- fin if sesión -->
-</header>
+<div th:fragment="header">
+	<header>
+		<div class="header-container">
+			<div class="logo-nav">
+				<h1><a href="/" class="logo-link">Royal-Vallecas-Hotel</a></h1>
+				<nav class="main-nav">
+					<a href="/">Inicio</a>
+					<a href="#habitaciones-individuales">Habitaciones</a>
+					<a href="/servicios">Servicios</a>
+					<a href="#contacto">Contacto</a>
+				</nav>
+			</div>
+			<div th:if="${session.usuario != null}">
+				<span class="text-white">Hola, <b th:text="${session.usuario.nombre}"></b></span>
+				<a href="/usuario/logout" class="auth-btn">Cerrar sesión</a>
+			</div>
+			<div th:if="${session.usuario == null}">
+				<a href="/usuario/login" class="auth-btn">Iniciar sesión</a>
+				<a href="/usuario/registro" class="auth-btn register">Registrarse</a>
+			</div>
+
+		</div>
+	</header>
+</div>

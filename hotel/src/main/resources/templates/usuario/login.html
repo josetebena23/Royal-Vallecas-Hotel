@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="/css/index.css" />
+    <style>
+        /* login.css */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            max-width: 400px;
+            margin: 100px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3d59;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #1e3d59;
+        }
+
+        button[type="submit"] {
+            background-color: #1e3d59;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2a4f73;
+            transform: translateY(-2px);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        p a {
+            color: #ffc13b;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        p a:hover {
+            color: #e0a800;
+        }
+    </style>
+</head>
+
+<body>
+    <main
+        style="max-width: 400px; margin: 100px auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <h2 style="text-align: center; color: #1e3d59;">Iniciar sesión</h2>
+        <form method="post" action="/usuario/login">
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required />
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <input type="checkbox" id="mostrar" onclick="togglePassword()" />
+                <label for="mostrar">Mostrar contraseña</label>
+            </div>
+            <button type="submit">Entrar</button>
+            <p th:if="${error}" th:text="${error}" style="color: red; text-align: center;"></p>
+
+        </form>
+        <p style="text-align: center; margin-top: 15px;">¿No tienes cuenta? <a href="/usuario/registro">Regístrate</a>
+        </p>
+    </main>
+</body>
+
+</html>
+<script>
+    function togglePassword() {
+        const input = document.getElementById("contrasena");
+        input.type = input.type === "password" ? "text" : "password";
+    }
+</script>
