@@ -1,14 +1,44 @@
-<section class="hero">
-    <h2>Bienvenido al confort de Vallecas</h2>
-</section>
+<style>
+.carousel-container {
+  position: relative;
+  max-width: 250px;
+  overflow: hidden;
+}
 
-<main>
-    <h3>Reserva tu habitación con nosotros</h3>
-    <p>
-        Disfruta de una experiencia única en el corazón de Madrid. Habitaciones cómodas, atención personalizada y
-        ubicación ideal.
-    </p>
-</main>
+.carousel-images {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.carousel-images img {
+  flex-shrink: 0;
+  width: 250px;
+  height: 250px;
+  user-select: none;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(30, 61, 89, 0.7);
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 3px;
+  user-select: none;
+}
+
+.carousel-btn.prev {
+  left: 5px;
+}
+
+.carousel-btn.next {
+  right: 5px;
+}
+</style>
 
 <div id="habitaciones-individuales" class="anchor-offset"></div>
 
@@ -29,11 +59,15 @@
             <tbody>
                 <tr th:each="hab : ${habitaciones}" th:if="${hab.tipo.name() == 'INDIVIDUAL'}">
                     <td>
-                        <div style="display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; max-width: 100%;">
-                            <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                alt="Imagen por defecto" width="100" style="flex-shrink: 0;" />
-                            <img th:each="img : ${hab.imagenes}" th:if="${!#lists.isEmpty(hab.imagenes)}"
-                                th:src="@{${img.url}}" alt="Imagen habitación" width="100" style="flex-shrink: 0;" />
+                        <div class="carousel-container" style="max-width: 250px; position: relative; overflow: hidden;">
+                            <div class="carousel-images" style="display: flex; transition: transform 0.3s ease;">
+                                <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
+                                    alt="Imagen por defecto" width="250" style="flex-shrink: 0;" />
+                                <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}" alt="Imagen habitación"
+                                    width="250" style="flex-shrink: 0;" />
+                            </div>
+                            <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
+                            <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
                         </div>
                     </td>
                     <td th:text="${hab.descripcion}"></td>
@@ -59,11 +93,15 @@
             <tbody>
                 <tr th:each="hab : ${habitaciones}" th:if="${hab.tipo.name() == 'DOBLE'}">
                     <td>
-                        <div style="display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; max-width: 100%;">
-                            <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                alt="Imagen por defecto" width="100" style="flex-shrink: 0;" />
-                            <img th:each="img : ${hab.imagenes}" th:if="${!#lists.isEmpty(hab.imagenes)}"
-                                th:src="@{${img.url}}" alt="Imagen habitación" width="100" style="flex-shrink: 0;" />
+                        <div class="carousel-container" style="max-width: 250px; position: relative; overflow: hidden;">
+                            <div class="carousel-images" style="display: flex; transition: transform 0.3s ease;">
+                                <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
+                                    alt="Imagen por defecto" width="250" style="flex-shrink: 0;" />
+                                <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}" alt="Imagen habitación"
+                                    width="250" style="flex-shrink: 0;" />
+                            </div>
+                            <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
+                            <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
                         </div>
                     </td>
                     <td th:text="${hab.descripcion}"></td>
@@ -89,11 +127,15 @@
             <tbody>
                 <tr th:each="hab : ${habitaciones}" th:if="${hab.tipo.name() == 'SUITE'}">
                     <td>
-                        <div style="display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; max-width: 100%;">
-                            <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                alt="Imagen por defecto" width="100" style="flex-shrink: 0;" />
-                            <img th:each="img : ${hab.imagenes}" th:if="${!#lists.isEmpty(hab.imagenes)}"
-                                th:src="@{${img.url}}" alt="Imagen habitación" width="100" style="flex-shrink: 0;" />
+                        <div class="carousel-container" style="max-width: 250px; position: relative; overflow: hidden;">
+                            <div class="carousel-images" style="display: flex; transition: transform 0.3s ease;">
+                                <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
+                                    alt="Imagen por defecto" width="250" style="flex-shrink: 0;" />
+                                <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}" alt="Imagen habitación"
+                                    width="250" style="flex-shrink: 0;" />
+                            </div>
+                            <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
+                            <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
                         </div>
                     </td>
                     <td th:text="${hab.descripcion}"></td>
@@ -103,8 +145,10 @@
             </tbody>
         </table>
     </fieldset>
+
 </section>
 
+<!-- Contacto -->
 <section id="contacto" class="contacto-section">
     <h3>Contacto</h3>
     <div class="contacto-container">
@@ -116,137 +160,10 @@
             <p><strong>Horario:</strong> Recepción 24 horas</p>
         </div>
 
-<<<<<<< HEAD
-    <div id="habitaciones-individuales" class="anchor-offset"></div>
-
-    <!-- Habitaciones -->
-    <section class="habitaciones-section">
-        <!-- Individual -->
-        <!-- Habitaciones Individuales -->
-        <fieldset>
-            <legend><strong>Habitaciones Individuales</strong></legend>
-            <table id="tabla-individual" class="display">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Nombre</th>
-                        <th>Capacidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="hab : ${habitaciones}" th:if="${hab.tipo.name() == 'INDIVIDUAL'}">
-                        <td>
-                            <div style="display: flex; gap: 5px; overflow-x: auto; max-width: 250px;">
-                                <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                    alt="Imagen por defecto" width="100" style="flex-shrink: 0;" />
-                                <img th:each="img : ${hab.imagenes}" th:if="${!#lists.isEmpty(hab.imagenes)}"
-                                    th:src="@{${img.url}}" alt="Imagen habitación" width="100"
-                                    style="flex-shrink: 0;" />
-                            </div>
-                        </td>
-
-
-                        <td th:text="${hab.descripcion}"></td>
-                        <td th:text="${hab.capacidad} + ' personas'"></td>
-                        <td th:text="${hab.precio} + ' €/noche'"></td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </fieldset>
-
-        <!-- Habitaciones Dobles -->
-        <fieldset>
-            <legend><strong>Habitaciones Dobles</strong></legend>
-            <table id="tabla-doble" class="display">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Nombre</th>
-                        <th>Capacidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-
-
-                <tbody>
-                    <tr th:each="hab : ${habitaciones}" th:if="${hab.tipo.name() == 'DOBLE'}">
-                        <td>
-                            <div style="display: flex; gap: 5px; overflow-x: auto; max-width: 250px;">
-                                <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                    alt="Imagen por defecto" width="100" style="flex-shrink: 0;" />
-                                <img th:each="img : ${hab.imagenes}" th:if="${!#lists.isEmpty(hab.imagenes)}"
-                                    th:src="@{${img.url}}" alt="Imagen habitación" width="100"
-                                    style="flex-shrink: 0;" />
-                            </div>
-                        </td>
-
-
-                        <td th:text="${hab.descripcion}"></td>
-                        <td th:text="${hab.capacidad} + ' personas'"></td>
-                        <td th:text="${hab.precio} + ' €/noche'"></td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </fieldset>
-
-        <!-- Suites -->
-        <fieldset>
-            <legend><strong>Suites</strong></legend>
-            <table id="tabla-suite" class="display">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Nombre</th>
-                        <th>Capacidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="hab : ${habitaciones}" th:if="${hab.tipo.name() == 'SUITE'}">
-                        <td>
-                            <div style="display: flex; gap: 5px; overflow-x: auto; max-width: 250px;">
-                                <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                    alt="Imagen por defecto" width="100" style="flex-shrink: 0;" />
-                                <img th:each="img : ${hab.imagenes}" th:if="${!#lists.isEmpty(hab.imagenes)}"
-                                    th:src="@{${img.url}}" alt="Imagen habitación" width="100"
-                                    style="flex-shrink: 0;" />
-                            </div>
-                        </td>
-
-
-                        <td th:text="${hab.descripcion}"></td>
-                        <td th:text="${hab.capacidad} + ' personas'"></td>
-                        <td th:text="${hab.precio} + ' €/noche'"></td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </fieldset>
-
-    </section>
-
-    <!-- Contacto -->
-    <div id="contacto" class="anchor-offset"></div>
-
-    <section class="contacto-section">
-        <h3>Contacto</h3>
-        <div class="contacto-container">
-            <div class="contacto-info">
-                <h4>Información de contacto</h4>
-                <p><strong>Dirección:</strong> Calle Vallecas, 123, 28051 Madrid</p>
-                <p><strong>Teléfono:</strong> +34 912 345 678</p>
-                <p><strong>Email:</strong> info@royalvallecashotel.com</p>
-                <p><strong>Horario:</strong> Recepción 24 horas</p>
-=======
         <form class="contacto-form">
             <h4>Envíanos un mensaje</h4>
             <div class="form-group">
                 <input type="text" placeholder="Nombre" required />
->>>>>>> 59ab47a (🔥 Login y registro con contraseñas encriptadas + nuevas vistas y mejoras visuales)
             </div>
             <div class="form-group">
                 <input type="email" placeholder="Email" required />
@@ -262,6 +179,7 @@
     </div>
 </section>
 
+<!-- Zona de Administración -->
 <section style="padding: 30px; text-align: center;">
     <h3 style="color: #1e3d59;">Zona de Administración</h3>
     <form action="/usuario/r" style="display: inline-block; margin: 10px;">
@@ -274,3 +192,27 @@
         <input type="submit" class="auth-btn" value="Gestión de Reservas" />
     </form>
 </section>
+
+<script>
+document.querySelectorAll('.carousel-container').forEach(carousel => {
+  const images = carousel.querySelector('.carousel-images');
+  const prevBtn = carousel.querySelector('.carousel-btn.prev');
+  const nextBtn = carousel.querySelector('.carousel-btn.next');
+  const imageCount = images.children.length;
+  let index = 0;
+
+  function updateCarousel() {
+    images.style.transform = `translateX(${-index * 250}px)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    index = (index - 1 + imageCount) % imageCount;
+    updateCarousel();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    index = (index + 1) % imageCount;
+    updateCarousel();
+  });
+});
+</script>
