@@ -20,11 +20,19 @@ public class UsuarioService {
 
     public Usuario guardarUsuario(Usuario usuario) {
         Optional<Usuario> existente = usuarioRepository.findByEmail(usuario.getEmail());
-        if (existente.isPresent()) {
+
+        // Si existe otro usuario con ese email Y no es el mismo que se está
+        // actualizando
+        if (existente.isPresent() && !existente.get().getId().equals(usuario.getId())) {
             throw new RuntimeException("El email ya está registrado. Por favor, use otro.");
         }
-        // Encriptar la contraseña antes de guardar
-        usuario.setContrasena(encoder.encode(usuario.getContrasena()));
+
+        // Solo encriptamos si se ha cambiado la contraseña (ya viene encriptada si no
+        // se modifica)
+        if (!usuario.getContrasena().startsWith("$2a$")) { // Detecta si ya está encriptada
+            usuario.setContrasena(encoder.encode(usuario.getContrasena()));
+        }
+
         return usuarioRepository.save(usuario);
     }
 

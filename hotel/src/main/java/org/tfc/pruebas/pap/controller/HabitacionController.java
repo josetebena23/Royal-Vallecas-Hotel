@@ -19,6 +19,8 @@ import org.tfc.pruebas.pap.exception.DangerException;
 import org.tfc.pruebas.pap.helper.PRG;
 import org.tfc.pruebas.pap.services.HabitacionService;
 
+import ch.qos.logback.core.model.Model;
+
 @Controller
 @RequestMapping("/habitacion")
 public class HabitacionController {
@@ -166,6 +168,18 @@ public class HabitacionController {
             e.printStackTrace();
         }
         return "redirect:/habitacion/u?id=" + habitacionId;
+    }
+
+    @GetMapping("/todas")
+    public String verTodasLasHabitaciones(
+            @RequestParam(required = false) String tipo,
+            @RequestParam(required = false) String estado,
+            ModelMap model) {
+
+        List<Habitacion> habitacionesFiltradas = habitacionService.buscarConFiltros(tipo, estado);
+        model.put("habitaciones", habitacionesFiltradas);
+        model.put("view", "habitacion/habitacionesBuscador");
+        return "_t/frame";
     }
 
 }

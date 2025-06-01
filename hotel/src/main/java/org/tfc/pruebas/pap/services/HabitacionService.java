@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class HabitacionService {
@@ -90,6 +91,13 @@ public class HabitacionService {
             }
             imagenRepo.deleteById(id);
         }
+    }
+
+    public List<Habitacion> buscarConFiltros(String tipo, String estado) {
+        return habitacionRepository.findAll().stream()
+                .filter(h -> (tipo == null || tipo.isEmpty() || h.getTipo().name().equalsIgnoreCase(tipo)))
+                .filter(h -> (estado == null || estado.isEmpty() || h.getEstado().name().equalsIgnoreCase(estado)))
+                .collect(Collectors.toList());
     }
 
 }

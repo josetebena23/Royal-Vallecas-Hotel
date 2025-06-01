@@ -192,9 +192,7 @@ table th {
     min-width: 250px;
 }
 
-table thead tr th:first-child {
-    visibility: hidden;
-}
+
 
 table td {
     padding: 25px 40px;
@@ -237,7 +235,7 @@ fieldset {
     border: 2px solid #1e3d59;
     width: fit-content;
     background-color: #f5f9ff;
-    max-width: 800px;
+    max-width: 1200px;
     scroll-margin-top: 120px;
 }
 
@@ -388,13 +386,13 @@ footer p {
 
     table {
         width: 100%;
-        border-spacing: 15px 10px;
+    border-spacing: 20px 15px;
     }
 
     table td,
     table th {
         padding: 15px;
-        min-width: auto;
+    min-width: 180px; /* en vez de 250 */
     }
 
     table img {

@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.tfc.pruebas.pap.entities.Administrador;
 import org.tfc.pruebas.pap.entities.Cliente;
 import org.tfc.pruebas.pap.entities.Editor;
+import org.tfc.pruebas.pap.entities.Reserva;
 import org.tfc.pruebas.pap.entities.Usuario;
+import org.tfc.pruebas.pap.services.ReservaService;
 import org.tfc.pruebas.pap.services.UsuarioService;
 import org.tfc.pruebas.pap.helper.PRG;
 import org.tfc.pruebas.pap.exception.DangerException;
@@ -22,6 +24,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private ReservaService reservaService;
 
     @GetMapping("r")
     public String r(ModelMap m) {
@@ -165,25 +170,47 @@ public class UsuarioController {
             @RequestParam("id") Long id,
             @RequestParam("nombre") String nombre,
             @RequestParam("email") String email,
-            @RequestParam("contrasena") String contrasena) throws DangerException {
+            @RequestParam("contrasena") String contrasena,
+            HttpSession session) throws DangerException {
+
+        Usuario sessionUsuario = (Usuario) session.getAttribute("usuario");
+
+        // Solo permite modificar si el que está en sesión es el mismo o un admin
+        if (sessionUsuario == null
+                || (!sessionUsuario.getId().equals(id) && sessionUsuario.getRol() != Usuario.Rol.ADMINISTRADOR)) {
+            return "redirect:/";
+        }
+
         try {
             Usuario u = usuarioService.buscarPorId(id).orElse(null);
+
             if (u != null) {
+                // Validamos que el email no esté en uso por otro usuario
+                Optional<Usuario> usuarioConEseEmail = usuarioService.buscarPorEmail(email);
+                if (usuarioConEseEmail.isPresent() && !usuarioConEseEmail.get().getId().equals(u.getId())) {
+                    PRG.error("Ese email ya está en uso por otro usuario", "/usuario/perfil");
+                }
+
                 u.setNombre(nombre);
                 u.setEmail(email);
 
-                // Solo actualiza la contraseña si se escribió algo
-                if (contrasena != null && !contrasena.trim().isEmpty() &&
-                        !usuarioService.comprobarContrasena(contrasena, u.getContrasena())) {
-                    u.setContrasena(contrasena); // se encripta dentro del service
+                if (contrasena != null && !contrasena.trim().isEmpty()
+                        && !usuarioService.comprobarContrasena(contrasena, u.getContrasena())) {
+                    u.setContrasena(contrasena); // ya se encripta dentro del service
                 }
 
                 usuarioService.guardarUsuario(u);
+
+                // ✅ Actualizamos la sesión con el nuevo usuario actualizado
+                session.setAttribute("usuario", u);
             }
+
         } catch (Exception e) {
-            PRG.error("Error al actualizar usuario", "/usuario/r");
+            e.printStackTrace();
+            PRG.error("Error al actualizar usuario", "/usuario/perfil");
         }
-        return "redirect:/usuario/r";
+
+        return "redirect:/usuario/perfil?exito=true";
     }
 
     @PostMapping("d")
@@ -195,4 +222,39 @@ public class UsuarioController {
         }
         return "redirect:/usuario/r";
     }
+
+    @GetMapping("/perfil")
+    public String verPerfilCliente(HttpSession session, ModelMap m) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario == null || usuario.getRol() != Usuario.Rol.CLIENTE) {
+            return "redirect:/usuario/login";
+        }
+
+        m.put("usuario", usuario);
+        m.put("reservas", reservaService.obtenerReservasPorUsuario(usuario));
+        m.put("view", "usuario/perfil");
+        return "_t/frame";
+    }
+
+    @PostMapping("/cancelar-reserva")
+    public String cancelarReserva(
+            @RequestParam("idReserva") Long idReserva,
+            HttpSession session) throws DangerException {
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario == null || usuario.getRol() != Usuario.Rol.CLIENTE) {
+            return "redirect:/usuario/login";
+        }
+
+        Reserva reserva = reservaService.buscarPorId(idReserva).orElse(null);
+
+        if (reserva != null && reserva.getUsuario().getId().equals(usuario.getId())) {
+            reservaService.cancelarReserva(idReserva);
+        }
+
+        return "redirect:/usuario/perfil";
+    }
+
 }

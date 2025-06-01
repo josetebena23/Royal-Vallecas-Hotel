@@ -3,6 +3,7 @@ package org.tfc.pruebas.pap.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tfc.pruebas.pap.entities.Reserva;
+import org.tfc.pruebas.pap.entities.Usuario;
 import org.tfc.pruebas.pap.repositories.ReservaRepository;
 
 import java.util.List;
@@ -56,4 +57,17 @@ public class ReservaService {
     public void eliminarReserva(Long id) {
         reservaRepository.deleteById(id);
     }
+
+    public List<Reserva> obtenerReservasPorUsuario(Usuario usuario) {
+        return reservaRepository.findByUsuario(usuario);
+    }
+
+    public void cancelarReserva(Long id) {
+        Reserva reserva = reservaRepository.findById(id).orElse(null);
+        if (reserva != null) {
+            reserva.setEstado(Reserva.Estado.CANCELADA);
+            reservaRepository.save(reserva);
+        }
+    }
+
 }

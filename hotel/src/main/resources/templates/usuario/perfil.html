@@ -1,0 +1,107 @@
+<div style="max-width: 800px; margin: 0 auto; padding: 30px; font-family: Arial, sans-serif;">
+    <h2 style="color: #cda34f; text-align: center; margin-bottom: 30px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#cda34f" viewBox="0 0 16 16"
+            style="vertical-align: middle; margin-right: 8px;">
+            <path
+                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm4 8H4a1 1 0 0 1-1-1c0-2.21 3.582-3 5-3s5 .79 5 3a1 1 0 0 1-1 1z" />
+        </svg>
+        Perfil del Cliente
+    </h2>
+
+    <!-- Formulario de edición -->
+    <form method="post" action="/usuario/u"
+        style="margin-bottom: 40px; background: #f9f9f9; padding: 20px; border-radius: 10px;">
+        <input type="hidden" name="id" th:value="${usuario.id}" />
+
+        <div style="margin-bottom: 15px;">
+            <label for="nombre"><strong>Nombre:</strong></label>
+            <input type="text" id="nombre" name="nombre" th:value="${usuario.nombre}" required
+                style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="email"><strong>Email:</strong></label>
+            <input type="email" id="email" name="email" th:value="${usuario.email}" required
+                style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="contrasena"><strong>Contraseña (opcional):</strong></label>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Dejar en blanco si no desea cambiarla"
+                style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+        </div>
+
+        <button type="submit"
+            style="background-color: #cda34f; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">
+            Guardar cambios
+        </button>
+    </form>
+
+    <h3 style="color: #333; margin-bottom: 10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#333" viewBox="0 0 16 16"
+            style="vertical-align: middle; margin-right: 6px;">
+            <path
+                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v1H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM0 14V5h16v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z" />
+        </svg>
+        Mis reservas
+    </h3>
+
+    <div th:if="${#lists.isEmpty(reservas)}">
+        <p style="color: gray;">No tienes reservas aún.</p>
+    </div>
+
+    <div th:if="${!#lists.isEmpty(reservas)}">
+        <table style="width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+            <thead style="background-color: #cda34f; color: white;">
+                <tr>
+                    <th style="padding: 10px;">ID</th>
+                    <th style="padding: 10px;">Habitación</th>
+                    <th style="padding: 10px;">Entrada</th>
+                    <th style="padding: 10px;">Salida</th>
+                    <th style="padding: 10px;">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reserva : ${reservas}" style="text-align: center;">
+                    <td th:text="${reserva.id}" style="padding: 10px;"></td>
+                    <td th:text="${reserva.habitacion.numero}" style="padding: 10px;"></td>
+                    <td th:text="${reserva.fechaEntrada}" style="padding: 10px;"></td>
+                    <td th:text="${reserva.fechaSalida}" style="padding: 10px;"></td>
+                    <td style="padding: 10px;">
+                        <span th:text="${reserva.estado}"></span>
+                        <form th:if="${reserva.estado.name() != 'CANCELADA'}" method="post"
+                            action="/usuario/cancelar-reserva" style="display:inline;">
+                            <input type="hidden" name="idReserva" th:value="${reserva.id}" />
+                            <button type="submit" style="background: none; border: none; cursor: pointer;"
+                                title="Cancelar reserva">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.5 5.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5z" />
+                                    <path
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1 0-2h3.086a1 1 0 0 1 .707.293l.707.707h2.414l.707-.707A1 1 0 0 1 10.414 1H13.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<div th:if="${param.exito}"
+    style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+    ✅ Los datos se han actualizado correctamente.
+</div>
+<script>
+    // Espera 3 segundos y luego oculta el mensaje
+    setTimeout(() => {
+        const successMsg = document.querySelector('[th\\:if="${param.exito}"]');
+        if (successMsg) {
+            successMsg.style.transition = 'opacity 0.5s ease-out';
+            successMsg.style.opacity = '0';
+            setTimeout(() => successMsg.remove(), 500); // Elimina del DOM tras el fade-out
+        }
+    }, 3000);
+</script>

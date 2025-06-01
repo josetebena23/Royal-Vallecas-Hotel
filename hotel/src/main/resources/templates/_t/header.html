@@ -1,5 +1,76 @@
 <div th:fragment="header">
-	<header>
+	<header class="sticky-header">
+		<style>
+			/* ENCABEZADO FIJO */
+			.sticky-header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				z-index: 1000;
+				background-color: #12054a;
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+			}
+
+			.header-container {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 15px 30px;
+			}
+
+			.logo-link {
+				font-size: 24px;
+				font-weight: bold;
+				color: #cda34f;
+				text-decoration: none;
+			}
+
+			.main-nav a {
+				margin-left: 20px;
+				color: white;
+				text-decoration: none;
+				transition: color 0.3s;
+			}
+
+			.main-nav a:hover {
+				color: #cda34f;
+			}
+
+			.auth-btn {
+				display: inline-flex;
+				align-items: center;
+				background-color: #1e1e1e;
+				color: white;
+				padding: 6px 12px;
+				border-radius: 6px;
+				margin-left: 10px;
+				text-decoration: none;
+				font-weight: 500;
+				transition: background-color 0.2s, color 0.2s;
+			}
+
+			.auth-btn:hover {
+				background-color: #cda34f;
+				color: #000;
+			}
+
+			.auth-btn svg {
+				margin-right: 6px;
+			}
+
+			.text-white {
+				color: white;
+				margin-right: 10px;
+				font-weight: bold;
+			}
+
+			body {
+				padding-top: 80px;
+				/* Ajuste para que no tape el contenido */
+			}
+		</style>
+
 		<div class="header-container">
 			<div class="logo-nav">
 				<h1><a href="/" class="logo-link">Royal-Vallecas-Hotel</a></h1>
@@ -10,15 +81,25 @@
 					<a href="#contacto">Contacto</a>
 				</nav>
 			</div>
+
 			<div th:if="${session.usuario != null}">
-				<span class="text-white">Hola, <b th:text="${session.usuario.nombre}"></b></span>
+				<span class="text-white">Hola, <b th:text="${session.usuario.nombre}">Usuario</b></span>
+
+				<a href="/usuario/perfil" class="auth-btn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+						<path
+							d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm4 8H4a1 1 0 0 1-1-1c0-2.21 3.582-3 5-3s5 .79 5 3a1 1 0 0 1-1 1z" />
+					</svg>
+					Mi perfil
+				</a>
+
 				<a href="/usuario/logout" class="auth-btn">Cerrar sesión</a>
 			</div>
+
 			<div th:if="${session.usuario == null}">
 				<a href="/usuario/login" class="auth-btn">Iniciar sesión</a>
 				<a href="/usuario/registro" class="auth-btn register">Registrarse</a>
 			</div>
-
 		</div>
 	</header>
 </div>
