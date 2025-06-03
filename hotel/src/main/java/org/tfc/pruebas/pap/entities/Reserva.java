@@ -42,4 +42,27 @@ public class Reserva {
     public enum Estado {
         PENDIENTE, CONFIRMADA, CANCELADA, COMPLETADA
     }
+
+    @Transient  // Indica que este campo no se persiste en la base de datos
+    private String fechaEntradaFormateada;
+
+    @Transient
+    private String fechaSalidaFormateada;
+
+    // Getters y Setters para los nuevos campos
+    public String getFechaEntradaFormateada() {
+        return fechaEntradaFormateada;
+    }
+
+    public void setFechaEntradaFormateada(String fechaEntradaFormateada) {
+        this.fechaEntradaFormateada = fechaEntradaFormateada;
+    }
+
+    public String getFechaSalidaFormateada() {
+        return fechaSalidaFormateada;
+    }
+
+    public void setFechaSalidaFormateada(String fechaSalidaFormateada) {
+        this.fechaSalidaFormateada = fechaSalidaFormateada;
+    }
 }

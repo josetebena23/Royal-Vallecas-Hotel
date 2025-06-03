@@ -1,6 +1,8 @@
 package org.tfc.pruebas.pap.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,16 @@ public class ReservaController {
 
     @GetMapping("r")
     public String r(ModelMap m) {
-        m.put("reservas", reservaService.listarReservas());
+        List<Reserva> reservas = reservaService.listarReservas();
+
+        // Formatear fechas al formato español (DD/MM/YYYY)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        reservas.forEach(r -> {
+            r.setFechaEntradaFormateada(r.getFechaEntrada().format(formatter));
+            r.setFechaSalidaFormateada(r.getFechaSalida().format(formatter));
+        });
+
+        m.put("reservas", reservas);
         m.put("view", "reserva/r");
         return "_t/frame";
     }
