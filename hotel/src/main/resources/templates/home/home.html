@@ -189,250 +189,258 @@
     }
 </style>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<body>
+    <!-- Botón de menú hamburguesa para administración -->
+    <div class="dropdown position-fixed top-0 end-0 m-3">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-list"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown" style="min-width: 200px;">
+            <li><a class="dropdown-item" href="/usuario/r">Gestión de Usuarios</a></li>
+            <li><a class="dropdown-item" href="/habitacion/r">Gestión de Habitaciones</a></li>
+            <li><a class="dropdown-item" href="/reserva/r">Gestión de Reservas</a></li>
+        </ul>
+    </div>
 
-<!-- Encabezado de presentación del hotel -->
-<section class="hero-section">
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <h1>Royal Vallecas Hotel</h1>
-            <p>
-                Un hotel moderno, elegante y equipado con todo lo necesario para una estancia cómoda y placentera.
-                Disfruta de nuestras habitaciones premium en el corazón de <strong>Dirección Inventada, Madrid</strong>.
+
+
+    <!-- Encabezado de presentación del hotel -->
+    <section class="hero-section">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Royal Vallecas Hotel</h1>
+                <p>
+                    Un hotel moderno, elegante y equipado con todo lo necesario para una estancia cómoda y placentera.
+                    Disfruta de nuestras habitaciones premium en el corazón de <strong>Dirección Inventada,
+                        Madrid</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de características del hotel -->
+    <section style="background-color: #f9f9f9; padding: 40px 20px;">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <h2 style="color: #1e3d59; margin-bottom: 20px;">¿Por qué elegirnos?</h2>
+            <p style="color: #555; font-size: 18px; margin-bottom: 30px;">
+                En Royal Vallecas Hotel, te ofrecemos todo lo que necesitas para una experiencia inolvidable.
             </p>
-        </div>
-    </div>
-</section>
-
-<!-- Sección de características del hotel -->
-<section style="background-color: #f9f9f9; padding: 40px 20px;">
-    <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
-        <h2 style="color: #1e3d59; margin-bottom: 20px;">¿Por qué elegirnos?</h2>
-        <p style="color: #555; font-size: 18px; margin-bottom: 30px;">
-            En Royal Vallecas Hotel, te ofrecemos todo lo que necesitas para una experiencia inolvidable.
-        </p>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
-            <div style="max-width: 220px; text-align: center;">
-                <img src="/img/icons/icon-wifi.png" alt="Wifi gratis" width="60" style="margin-bottom: 10px;">
-                <h4 style="color: #cda34f;">Wi-Fi Gratis</h4>
-                <p style="color: #666;">Conéctate en todo el hotel con alta velocidad.</p>
-            </div>
-            <div style="max-width: 220px; text-align: center;">
-                <img src="/img/icons/icon-desayuno.png" alt="Desayuno incluido" width="60" style="margin-bottom: 10px;">
-                <h4 style="color: #cda34f;">Desayuno Incluido</h4>
-                <p style="color: #666;">Empieza tu día con energía y sabor.</p>
-            </div>
-            <div style="max-width: 220px; text-align: center;">
-                <img src="/img/icons/icon-parking.png" alt="Parking" width="60" style="margin-bottom: 10px;">
-                <h4 style="color: #cda34f;">Parking Privado</h4>
-                <p style="color: #666;">Aparca sin preocupaciones durante tu estancia.</p>
-            </div>
-            <div style="max-width: 220px; text-align: center;">
-                <img src="/img/icons/icon-gym.png" alt="Gimnasio" width="60" style="margin-bottom: 10px;">
-                <h4 style="color: #cda34f;">Gimnasio 24h</h4>
-                <p style="color: #666;">Mantente en forma con nuestro equipamiento moderno.</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+                <div style="max-width: 220px; text-align: center;">
+                    <img src="/img/icons/icon-wifi.png" alt="Wifi gratis" width="60" style="margin-bottom: 10px;">
+                    <h4 style="color: #cda34f;">Wi-Fi Gratis</h4>
+                    <p style="color: #666;">Conéctate en todo el hotel con alta velocidad.</p>
+                </div>
+                <div style="max-width: 220px; text-align: center;">
+                    <img src="/img/icons/icon-desayuno.png" alt="Desayuno incluido" width="60"
+                        style="margin-bottom: 10px;">
+                    <h4 style="color: #cda34f;">Desayuno Incluido</h4>
+                    <p style="color: #666;">Empieza tu día con energía y sabor.</p>
+                </div>
+                <div style="max-width: 220px; text-align: center;">
+                    <img src="/img/icons/icon-parking.png" alt="Parking" width="60" style="margin-bottom: 10px;">
+                    <h4 style="color: #cda34f;">Parking Privado</h4>
+                    <p style="color: #666;">Aparca sin preocupaciones durante tu estancia.</p>
+                </div>
+                <div style="max-width: 220px; text-align: center;">
+                    <img src="/img/icons/icon-gym.png" alt="Gimnasio" width="60" style="margin-bottom: 10px;">
+                    <h4 style="color: #cda34f;">Gimnasio 24h</h4>
+                    <p style="color: #666;">Mantente en forma con nuestro equipamiento moderno.</p>
+                </div>
             </div>
         </div>
+    </section>
+
+
+    <div id="habitaciones-individuales" class="anchor-offset"></div>
+
+    <section class="habitaciones-section">
+
+        <!-- Habitaciones Individuales -->
+        <th:block th:with="mostradoIndividual=false, mostradoDoble=false, mostradoSuite=false">
+
+            <!-- Individual -->
+            <fieldset>
+                <legend><strong>Habitaciones Individuales</strong></legend>
+                <div class="room-description">
+                    <i class="bi bi-person"></i>
+                    <span>Habitación pensada para una persona. Cama individual, escritorio y baño privado.</span>
+                </div>
+                <table class="display">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Descripción</th>
+                            <th>Capacidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="hab : ${habitaciones}">
+                        <tr th:if="${hab.tipo.name() == 'INDIVIDUAL'} and !${mostradoIndividual}"
+                            th:with="mostradoIndividual=true">
+                            <td>
+                                <div class="carousel-container">
+                                    <div class="carousel-images">
+                                        <img th:if="${#lists.isEmpty(hab.imagenes)}"
+                                            th:src="@{/img/habitacion-default.jpg}" alt="Imagen por defecto" />
+                                        <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}"
+                                            alt="Imagen habitación" />
+                                    </div>
+                                    <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
+                                    <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
+                                </div>
+                            </td>
+                            <td th:text="${hab.descripcion}"></td>
+                            <td th:text="${hab.capacidad} + ' personas'"></td>
+                            <td th:text="${hab.precio} + ' €/noche'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <!-- Doble -->
+            <fieldset>
+                <legend><strong>Habitaciones Dobles</strong></legend>
+                <div class="room-description">
+                    <i class="bi bi-people"></i>
+                    <span>Ideal para parejas o amigos. Cama doble o dos camas, baño completo y mayor amplitud.</span>
+                </div>
+                <table class="display">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Descripción</th>
+                            <th>Capacidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="hab : ${habitaciones}">
+                        <tr th:if="${hab.tipo.name() == 'DOBLE'} and !${mostradoDoble}" th:with="mostradoDoble=true">
+                            <td>
+                                <div class="carousel-container">
+                                    <div class="carousel-images">
+                                        <img th:if="${#lists.isEmpty(hab.imagenes)}"
+                                            th:src="@{/img/habitacion-default.jpg}" alt="Imagen por defecto" />
+                                        <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}"
+                                            alt="Imagen habitación" />
+                                    </div>
+                                    <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
+                                    <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
+                                </div>
+                            </td>
+                            <td th:text="${hab.descripcion}"></td>
+                            <td th:text="${hab.capacidad} + ' personas'"></td>
+                            <td th:text="${hab.precio} + ' €/noche'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <!-- Suite -->
+            <fieldset>
+                <legend><strong>Suites</strong></legend>
+                <div class="room-description">
+                    <i class="bi bi-star-fill"></i>
+                    <span>Nuestra categoría premium. Más espacio, zona de estar y servicios exclusivos.</span>
+                </div>
+                <table class="display">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Descripción</th>
+                            <th>Capacidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="hab : ${habitaciones}">
+                        <tr th:if="${hab.tipo.name() == 'SUITE'} and !${mostradoSuite}" th:with="mostradoSuite=true">
+                            <td>
+                                <div class="carousel-container">
+                                    <div class="carousel-images">
+                                        <img th:if="${#lists.isEmpty(hab.imagenes)}"
+                                            th:src="@{/img/habitacion-default.jpg}" alt="Imagen por defecto" />
+                                        <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}"
+                                            alt="Imagen habitación" />
+                                    </div>
+                                    <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
+                                    <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
+                                </div>
+                            </td>
+                            <td th:text="${hab.descripcion}"></td>
+                            <td th:text="${hab.capacidad} + ' personas'"></td>
+                            <td th:text="${hab.precio} + ' €/noche'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+        </th:block>
+
+    </section>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/habitacion/todas" class="ver-mas-btn">Ver más habitaciones</a>
     </div>
-</section>
 
-
-<div id="habitaciones-individuales" class="anchor-offset"></div>
-
-<section class="habitaciones-section">
-
-    <!-- Habitaciones Individuales -->
-    <th:block th:with="mostradoIndividual=false, mostradoDoble=false, mostradoSuite=false">
-
-        <!-- Individual -->
-        <fieldset>
-            <legend><strong>Habitaciones Individuales</strong></legend>
-            <div class="room-description">
-                <i class="bi bi-person"></i>
-                <span>Habitación pensada para una persona. Cama individual, escritorio y baño privado.</span>
+    <!-- Contacto -->
+    <section id="contacto" class="contacto-section">
+        <h3>Contacto</h3>
+        <div class="contacto-container">
+            <div class="contacto-info">
+                <h4>Información de contacto</h4>
+                <p><strong>Dirección:</strong> Calle Vallecas, 123, 28051 Madrid</p>
+                <p><strong>Teléfono:</strong> +34 912 345 678</p>
+                <p><strong>Email:</strong> info@royalvallecashotel.com</p>
+                <p><strong>Horario:</strong> Recepción 24 horas</p>
             </div>
-            <table class="display">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Descripción</th>
-                        <th>Capacidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody th:each="hab : ${habitaciones}">
-                    <tr th:if="${hab.tipo.name() == 'INDIVIDUAL'} and !${mostradoIndividual}"
-                        th:with="mostradoIndividual=true">
-                        <td>
-                            <div class="carousel-container">
-                                <div class="carousel-images">
-                                    <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                        alt="Imagen por defecto" />
-                                    <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}"
-                                        alt="Imagen habitación" />
-                                </div>
-                                <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
-                                <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
-                            </div>
-                        </td>
-                        <td th:text="${hab.descripcion}"></td>
-                        <td th:text="${hab.capacidad} + ' personas'"></td>
-                        <td th:text="${hab.precio} + ' €/noche'"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </fieldset>
 
-        <!-- Doble -->
-        <fieldset>
-            <legend><strong>Habitaciones Dobles</strong></legend>
-            <div class="room-description">
-                <i class="bi bi-people"></i>
-                <span>Ideal para parejas o amigos. Cama doble o dos camas, baño completo y mayor amplitud.</span>
-            </div>
-            <table class="display">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Descripción</th>
-                        <th>Capacidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody th:each="hab : ${habitaciones}">
-                    <tr th:if="${hab.tipo.name() == 'DOBLE'} and !${mostradoDoble}" th:with="mostradoDoble=true">
-                        <td>
-                            <div class="carousel-container">
-                                <div class="carousel-images">
-                                    <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                        alt="Imagen por defecto" />
-                                    <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}"
-                                        alt="Imagen habitación" />
-                                </div>
-                                <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
-                                <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
-                            </div>
-                        </td>
-                        <td th:text="${hab.descripcion}"></td>
-                        <td th:text="${hab.capacidad} + ' personas'"></td>
-                        <td th:text="${hab.precio} + ' €/noche'"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </fieldset>
-
-        <!-- Suite -->
-        <fieldset>
-            <legend><strong>Suites</strong></legend>
-            <div class="room-description">
-                <i class="bi bi-star-fill"></i>
-                <span>Nuestra categoría premium. Más espacio, zona de estar y servicios exclusivos.</span>
-            </div>
-            <table class="display">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Descripción</th>
-                        <th>Capacidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody th:each="hab : ${habitaciones}">
-                    <tr th:if="${hab.tipo.name() == 'SUITE'} and !${mostradoSuite}" th:with="mostradoSuite=true">
-                        <td>
-                            <div class="carousel-container">
-                                <div class="carousel-images">
-                                    <img th:if="${#lists.isEmpty(hab.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                                        alt="Imagen por defecto" />
-                                    <img th:each="img : ${hab.imagenes}" th:src="@{${img.url}}"
-                                        alt="Imagen habitación" />
-                                </div>
-                                <button class="carousel-btn prev" type="button" aria-label="Anterior">&lt;</button>
-                                <button class="carousel-btn next" type="button" aria-label="Siguiente">&gt;</button>
-                            </div>
-                        </td>
-                        <td th:text="${hab.descripcion}"></td>
-                        <td th:text="${hab.capacidad} + ' personas'"></td>
-                        <td th:text="${hab.precio} + ' €/noche'"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </fieldset>
-
-    </th:block>
-
-</section>
-<div style="text-align: center; margin-top: 20px;">
-    <a href="/habitacion/todas" class="ver-mas-btn">Ver más habitaciones</a>
-</div>
-
-<!-- Contacto -->
-<section id="contacto" class="contacto-section">
-    <h3>Contacto</h3>
-    <div class="contacto-container">
-        <div class="contacto-info">
-            <h4>Información de contacto</h4>
-            <p><strong>Dirección:</strong> Calle Vallecas, 123, 28051 Madrid</p>
-            <p><strong>Teléfono:</strong> +34 912 345 678</p>
-            <p><strong>Email:</strong> info@royalvallecashotel.com</p>
-            <p><strong>Horario:</strong> Recepción 24 horas</p>
+            <form class="contacto-form">
+                <h4>Envíanos un mensaje</h4>
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required />
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Teléfono" />
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Tu mensaje" rows="5" required></textarea>
+                </div>
+                <button type="submit">Enviar mensaje</button>
+            </form>
         </div>
-
-        <form class="contacto-form">
-            <h4>Envíanos un mensaje</h4>
-            <div class="form-group">
-                <input type="text" placeholder="Nombre" required />
-            </div>
-            <div class="form-group">
-                <input type="email" placeholder="Email" required />
-            </div>
-            <div class="form-group">
-                <input type="tel" placeholder="Teléfono" />
-            </div>
-            <div class="form-group">
-                <textarea placeholder="Tu mensaje" rows="5" required></textarea>
-            </div>
-            <button type="submit">Enviar mensaje</button>
-        </form>
-    </div>
-</section>
+    </section>
 
 
 
-<!-- Zona de Administración -->
-<section style="padding: 30px; text-align: center;">
-    <h3 style="color: #1e3d59;">Zona de Administración</h3>
-    <form action="/usuario/r" style="display: inline-block; margin: 10px;">
-        <input type="submit" class="auth-btn" value="Gestión de Usuarios" />
-    </form>
-    <form action="/habitacion/r" style="display: inline-block; margin: 10px;">
-        <input type="submit" class="auth-btn" value="Gestión de Habitaciones" />
-    </form>
-    <form action="/reserva/r" style="display: inline-block; margin: 10px;">
-        <input type="submit" class="auth-btn" value="Gestión de Reservas" />
-    </form>
-</section>
 
-<script>
-    document.querySelectorAll('.carousel-container').forEach(carousel => {
-        const images = carousel.querySelector('.carousel-images');
-        const prevBtn = carousel.querySelector('.carousel-btn.prev');
-        const nextBtn = carousel.querySelector('.carousel-btn.next');
-        const imageCount = images.children.length;
-        let index = 0;
 
-        function updateCarousel() {
-            images.style.transform = `translateX(${-index * 320}px)`;
-        }
 
-        prevBtn.addEventListener('click', () => {
-            index = (index - 1 + imageCount) % imageCount;
-            updateCarousel();
+    <script>
+        document.querySelectorAll('.carousel-container').forEach(carousel => {
+            const images = carousel.querySelector('.carousel-images');
+            const prevBtn = carousel.querySelector('.carousel-btn.prev');
+            const nextBtn = carousel.querySelector('.carousel-btn.next');
+            const imageCount = images.children.length;
+            let index = 0;
+
+            function updateCarousel() {
+                images.style.transform = `translateX(${-index * 320}px)`;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                index = (index - 1 + imageCount) % imageCount;
+                updateCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                index = (index + 1) % imageCount;
+                updateCarousel();
+            });
         });
-
-        nextBtn.addEventListener('click', () => {
-            index = (index + 1) % imageCount;
-            updateCarousel();
-        });
-    });
-</script>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</body>
