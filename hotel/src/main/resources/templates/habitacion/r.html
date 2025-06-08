@@ -1,3 +1,45 @@
+<style>
+    .carousel-container {
+        position: relative;
+        max-width: 250px;
+        overflow: hidden;
+    }
+
+    .carousel-images {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+    .carousel-images img {
+        flex-shrink: 0;
+        width: 250px;
+        height: 250px;
+        user-select: none;
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(30, 61, 89, 0.7);
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 3px;
+        user-select: none;
+    }
+
+    .carousel-btn.prev {
+        left: 5px;
+    }
+
+    .carousel-btn.next {
+        right: 5px;
+    }
+</style>
+
 <div class="container" style="margin-top: 25px;">
     <h1>Lista de habitaciones</h1>
 
@@ -25,12 +67,18 @@
                 <td th:text="${h.capacidad}"></td>
                 <td th:text="${h.descripcion}"></td>
                 <td th:text="${h.precio}"></td>
-                <td>
-                    <div style="display: flex; gap: 5px; overflow-x: auto; max-width: 200px;">
-                        <img th:if="${#lists.isEmpty(h.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
-                            alt="Imagen por defecto" width="80" />
-                        <img th:each="img : ${h.imagenes}" th:if="${!#lists.isEmpty(h.imagenes)}" th:src="@{${img.url}}"
-                            alt="Imagen habitación" width="80" />
+                <td style="width: 250px;">
+                    <div class="carousel-container" style="max-width: 250px; position: relative; overflow: hidden;">
+                        <div class="carousel-images" style="display: flex; transition: transform 0.3s ease;">
+                            <img th:if="${#lists.isEmpty(h.imagenes)}" th:src="@{/img/habitacion-default.jpg}"
+                                alt="Imagen por defecto" width="250" style="flex-shrink: 0;" />
+                            <img th:each="img : ${h.imagenes}" th:src="@{${img.url}}" alt="Imagen habitación"
+                                width="250" style="flex-shrink: 0;" />
+                        </div>
+                        <button class="carousel-btn prev" type="button" aria-label="Anterior"
+                            style="position: absolute; top: 50%; left: 0; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none;">&lt;</button>
+                        <button class="carousel-btn next" type="button" aria-label="Siguiente"
+                            style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none;">&gt;</button>
                     </div>
                 </td>
 
@@ -49,3 +97,34 @@
         </th:block>
     </table>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".carousel-container").forEach(container => {
+            const images = container.querySelector(".carousel-images");
+            const imageCount = images.children.length;
+            let index = 0;
+
+            const prevBtn = container.querySelector(".prev");
+            const nextBtn = container.querySelector(".next");
+
+            const updateCarousel = () => {
+                images.style.transform = `translateX(-${index * 250}px)`;
+            };
+
+            prevBtn.addEventListener("click", () => {
+                if (index > 0) {
+                    index--;
+                    updateCarousel();
+                }
+            });
+
+            nextBtn.addEventListener("click", () => {
+                if (index < imageCount - 1) {
+                    index++;
+                    updateCarousel();
+                }
+            });
+        });
+    });
+</script>
