@@ -1,4 +1,25 @@
 <div class="container" style="margin-top: 25px;">
+    <head>
+        <style>
+            .estado-pendiente {
+                color: orange;
+                font-weight: bold;
+            }
+            .estado-confirmada {
+                color: green;
+                font-weight: bold;
+            }
+            .estado-cancelada {
+                color: red;
+                font-weight: bold;
+            }
+            .estado-completada {
+                color: blue;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
     <h1>Lista de reservas</h1>
 
     <a href="/reserva/c">Crear nueva reserva</a><br /><br />
@@ -21,7 +42,12 @@
                 <td th:text="${r.habitacion.numero}"></td>
                 <td th:text="${r.fechaEntradaFormateada}"></td>
                 <td th:text="${r.fechaSalidaFormateada}"></td>
-                <td th:text="${r.estado}"></td>
+                <td th:text="${r.estado}"
+                    th:classappend="${r.estado.name() == 'PENDIENTE'} ? 'estado-pendiente' :
+                                    (${r.estado.name() == 'CONFIRMADA'} ? 'estado-confirmada' :
+                                    (${r.estado.name() == 'CANCELADA'} ? 'estado-cancelada' :
+                                    (${r.estado.name() == 'COMPLETADA'} ? 'estado-completada' : '')))">
+                </td>
                 <td>
                     <form th:action="@{/reserva/u}" method="get" style="display:inline">
                         <input type="hidden" name="id" th:value="${r.id}">
